@@ -1,0 +1,98 @@
+﻿@model CustomIdentity.ViewModels.EmployeeVM
+
+@{
+    ViewData["Title"] = "Add New Employee";
+}
+
+<h2>Add New Employee</h2>
+
+<style>
+    /* Iceberg shade background */
+    body {
+        background-color: #a5b5c5; /* Iceberg shade */
+        color: #333; /* Dark text color for readability */
+    }
+
+    /* Styling for the form */
+    .card {
+        background-color: rgba(255, 255, 255, 0.8); /* Slightly more transparent white background */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Soft shadow */
+        color: #333; /* Dark text color for form elements */
+        width: 90%; /* Slightly smaller width */
+        max-width: 600px; /* Set a maximum width for better control */
+        margin-top: 40px;
+        border-radius: 8px; /* Rounded corners for the card */
+        padding: 20px; /* Adjust padding for better spacing */
+        margin: 0 auto; /* Center the card */
+    }
+
+    .form-label {
+        color: #333; /* Dark text color for form labels */
+        font-weight: bold; /* Bold font for labels */
+        display: block; /* Make labels block elements to ensure they are on separate lines */
+        margin-bottom: 5px; /* Space below the label */
+    }
+
+    .form-control {
+        margin-bottom: 15px; /* Space below input fields */
+    }
+
+    .btn-primary {
+        background-color: #333; /* Dark grey background color */
+        border-color: #333; /* Dark grey border color */
+    }
+
+    .btn-primary:hover {
+        background-color: #555; /* Slightly lighter grey on hover */
+        border-color: #555; /* Slightly lighter grey border on hover */
+    }
+
+    .btn-secondary {
+        background-color: #6c757d; /* Bootstrap secondary button color */
+        border-color: #6c757d;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268; /* Slightly darker grey on hover */
+        border-color: #545b62; /* Slightly darker grey border on hover */
+    }
+</style>
+
+<div class="card p-4">
+    <form asp-action="Create" method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="mb-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Age" class="form-label"></label>
+            <input asp-for="Age" class="form-control" />
+            <span asp-validation-for="Age" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="EmploymentStatus" class="form-label"></label>
+            <input asp-for="EmploymentStatus" class="form-control" />
+            <span asp-validation-for="EmploymentStatus" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="JobTitle" class="form-label"></label>
+            <input asp-for="JobTitle" class="form-control" />
+            <span asp-validation-for="JobTitle" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

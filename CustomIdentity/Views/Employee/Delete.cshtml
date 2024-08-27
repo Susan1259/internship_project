@@ -1,0 +1,86 @@
+﻿@model CustomIdentity.Models.Employee
+
+@{
+    ViewData["Title"] = "Delete Employee";
+}
+
+<h2>Delete Employee</h2>
+
+<style>
+    /* Iceberg shade background */
+    body {
+        background-color: #a5b5c5; /* Iceberg shade */
+        color: #000; /* Black text color */
+    }
+
+    /* Larger text styling */
+    h4 {
+        font-size: 1.4rem; /* Slightly larger font size for headings */
+        color: #000; /* Black text color for the heading */
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: rgba(255, 255, 255, 0.2); /* Slightly transparent white background for headers */
+        color: #000; /* Black text color for headers */
+    }
+
+    td {
+        background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent white background for cells */
+        color: #000; /* Black text color for cells */
+    }
+
+    .btn-danger, .btn-secondary {
+        font-size: 1rem; /* Adjust button text size */
+    }
+
+    /* Form buttons styles */
+    .btn-danger {
+        background-color: #d9534f; /* Bootstrap danger button color */
+        border-color: #d9534f;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d; /* Bootstrap secondary button color */
+        border-color: #6c757d;
+    }
+</style>
+
+<div>
+    <hr />
+    <table>
+        <tr>
+            <th>Name</th>
+            <td>@Model.Name</td>
+        </tr>
+        <tr>
+            <th>Age</th>
+            <td>@Model.Age</td>
+        </tr>
+        <tr>
+            <th>Job Title</th>
+            <td>@Model.JobTitle</td>
+        </tr>
+        <tr>
+            <th>Employment Status</th>
+            <td>@Model.EmploymentStatus</td>
+        </tr>
+    </table>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger mt-3">Delete</button>
+        <a asp-action="Index" class="btn btn-secondary mt-3">Cancel</a>
+    </form>
+</div>

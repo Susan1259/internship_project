@@ -1,0 +1,98 @@
+﻿@using CustomIdentity.ViewModels
+@model LoginVM
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<style>
+    /* Background color for the page */
+    body {
+        background-color: #a5b5c5; /* Iceberg shade */
+        color: #fff; /* White text color */
+    }
+
+    /* Styling for login form */
+    .card {
+        background-color: rgba(255, 255, 255, 0.8); /* Slightly more transparent white background */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Soft shadow */
+        color: #333; /* Dark text color for form elements */
+        width: 90%; /* Slightly smaller width than before */
+        max-width: 400px; /* Set a maximum width for better control */
+        border-radius: 8px; /* Rounded corners for the card */
+        padding: 20px; /* Adjust padding for better spacing */
+    }
+
+    .form-title {
+        color: #71a6d2; /* Iceberg shade color for form title */
+        font-weight: bold; /* Bold font for title */
+    }
+
+    .form-label {
+        color: #71a6d2; /* Iceberg shade color for form labels */
+        font-weight: bold; /* Bold font for labels */
+    }
+
+    .form-check-label {
+        color: #71a6d2; /* Iceberg shade color for form check labels */
+    }
+
+    .btn-primary {
+        background-color: #71a6d2; /* Iceberg shade background color */
+        border-color: #71a6d2; /* Iceberg shade border color */
+    }
+
+        .btn-primary:hover {
+            background-color: #b3d9f0; /* Lighter iceberg background color on hover */
+            border-color: #b3d9f0; /* Lighter iceberg border color on hover */
+        }
+
+    /* Custom link color for registration */
+    .text-iceberg {
+        color: #71a6d2; /* Iceberg shade color for text links */
+    }
+
+        .text-iceberg:hover {
+            color: #b3d9f0; /* Lighter iceberg color on hover */
+        }
+</style>
+
+<div class="row d-flex align-items-center justify-content-center">
+    <div class="col-md-6 col-lg-4 card p-4">
+        <!-- Adjusted column width and padding for a medium-sized card -->
+        <h2 class="login-title form-title">
+            Login
+        </h2>
+        <form asp-action="Login" method="post" asp-route-returnurl="@ViewData["ReturnUrl"]">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="mb-1">
+                <label asp-for="Username" class="control-label form-label"></label>
+                <input asp-for="Username" class="form-control" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="mb-1">
+                <label asp-for="Password" class="control-label form-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="mb-1 form-check">
+                <input asp-for="RememberMe" class="form-check-input" />
+                <label class="form-check-label form-label">@Html.DisplayNameFor(a => a.RememberMe)</label>
+            </div>
+            <div class="row">
+                <div class="col-8">
+                    <a asp-action="Register" class="text-decoration-none float-start mt-2 text-iceberg" asp-route-returnurl="@ViewData["ReturnUrl"]">Don't have an account?</a>
+                </div>
+                <div class="col-4">
+                    <input type="submit" value="Login" class="btn btn-primary btn-sm float-end" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

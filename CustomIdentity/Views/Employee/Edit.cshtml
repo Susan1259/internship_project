@@ -1,0 +1,80 @@
+﻿@model CustomIdentity.ViewModels.EmployeeVM
+
+@{
+    ViewData["Title"] = "Edit Employee";
+}
+
+<h2>Edit Employee</h2>
+
+<style>
+    /* Iceberg shade background for the edit page */
+    body {
+        background-color: #a5b5c5; /* Iceberg shade */
+        color: #000; /* Black text color for contrast */
+    }
+
+    /* Keep the form background and input fields visually distinct */
+    .form-control {
+        background-color: #f0f4f8; /* Light background for input fields */
+        color: #000; /* Black text for input fields */
+    }
+
+    .form-label {
+        color: #000; /* Black labels */
+        display: block; /* Make labels block elements */
+        margin-bottom: 5px; /* Add space below labels */
+        font-weight: bold; /* Make labels bold */
+    }
+
+    .btn-primary {
+        background-color: #007bff; /* Bootstrap primary button color */
+        border-color: #007bff;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d; /* Bootstrap secondary button color */
+        border-color: #6c757d;
+    }
+
+    /* Validation error messages */
+    .text-danger {
+        color: #d9534f; /* Red color for validation errors */
+    }
+</style>
+
+<form asp-action="Edit" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Age</label>
+        <input asp-for="Age" class="form-control" />
+        <span asp-validation-for="Age" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Employment Status</label>
+        <input asp-for="EmploymentStatus" class="form-control" />
+        <span asp-validation-for="EmploymentStatus" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Job Title</label>
+        <input asp-for="JobTitle" class="form-control" />
+        <span asp-validation-for="JobTitle" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,119 @@
+﻿@model IEnumerable<CustomIdentity.Models.Employee>
+
+@{
+    ViewData["Title"] = "Employees List";
+    var isAdmin = User.IsInRole("Admin");
+    var isManager = User.IsInRole("Manager");
+}
+
+<style>
+    /* Background color for the page */
+    body {
+        background-color: #a5b5c5; /* Iceberg shade */
+    }
+
+    /* Styles for buttons */
+    .btn-edit, .btn-delete, .btn-add {
+        background-color: #333; /* Dark grey */
+        color: #fff; /* White text */
+        border: 1px solid #333; /* Dark grey border */
+    }
+
+        .btn-edit:hover, .btn-delete:hover, .btn-add:hover {
+            background-color: #555; /* Slightly lighter grey for hover effect */
+        }
+
+    /* Styling for table rows and columns */
+    table {
+        width: 100%;
+        border-collapse: collapse; /* Removes extra space between table cells */
+    }
+
+        table th, table td {
+            padding: 10px; /* Add padding for better spacing */
+            border-right: 1px solid #ddd; /* Vertical separation between columns */
+            text-align: left; /* Align text to the left */
+        }
+
+        table th {
+            background-color: #f2f2f2; /* Light grey background for headers */
+            border-bottom: 2px solid #333; /* Slightly thicker line for headers */
+        }
+
+            table td:last-child, table th:last-child {
+                border-right: none; /* Remove border from the last column */
+            }
+
+        /* Optional: Adjust the bottom border of table rows */
+        table tr:last-child td {
+            border-bottom: none; /* Remove bottom border from the last row */
+        }
+
+    /* Search box styling */
+    #searchInput {
+        margin-bottom: 20px; /* Space between search input and table */
+    }
+</style>
+
+<h2>Employees List</h2>
+
+@if (isAdmin || isManager)
+{
+    <p>
+        @if (isAdmin)
+        {
+            <a asp-action="Create" class="btn btn-add btn-primary">Add New Employee</a>
+        }
+    </p>
+}
+
+<div class="mb-3">
+    <input type="text" id="searchInput" class="form-control" placeholder="Search employees...">
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Employment Status</th>
+            <th>Job Title</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model)
+        {
+            <tr>
+                <td>@employee.Name</td>
+                <td>@employee.Age</td>
+                <td>@employee.EmploymentStatus</td>
+                <td>@employee.JobTitle</td>
+                <td>
+                    @if (isManager || isAdmin)
+                    {
+                        <a asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-edit btn-sm">Edit</a>
+                    }
+
+                    @if (isManager || isAdmin)
+                    {
+                        <a asp-action="Delete" asp-route-id="@employee.Id" class="btn btn-delete btn-sm">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        document.getElementById('searchInput').addEventListener('keyup', function () {
+            var filter = this.value.toLowerCase();
+            var rows = document.querySelectorAll('table tbody tr');
+            rows.forEach(function (row) {
+                var text = row.textContent.toLowerCase();
+                row.style.display = text.includes(filter) ? '' : 'none';
+            });
+        });
+    </script>
+}
